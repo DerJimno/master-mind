@@ -51,38 +51,39 @@ class Matsermind
     update_board(@chosen_code)
     feedback
   end
-end
 
-def play
-  puts "Welcome to Mastermind"
-  print "----------------"
-  print "----------------"
-  print "--{"
-  print " Rules "
-  print "}------------" 
-  print "----------------"
-  print "---------""\n"
-  puts "1- There are 6 possibilities in which only 4/6 numbers can occur(No Duplicates)"
-  puts "2- In feedback (*) means you guessed one right number in it's right position"
-  puts "3- (~) means you got one right number but misplaced it"
-  puts "4- The feedback elements aren't sorted in proper order, Good-Luck ;)"
-  print "----------------"
-  print "----------------"
-  print "----------------"
-  print "----------------"
-  print "----------------" "\n"
-  puts "Try 4 different numbers (1-6) separated by 'space'"
-  12.times do 
-    turn
-    @feedback = []
-    if win?
-      puts "Code-breaker wins"
-      break
+  def play
+    puts "Welcome to Mastermind"
+    print "----------------"
+    print "----------------"
+    print "--{"
+    print " Rules "
+    print "}------------" 
+    print "----------------"
+    print "---------""\n"
+    puts "1- There are 6 possibilities in which only 4/6 numbers can occur(No Duplicates)"
+    puts "2- In feedback (*) means you guessed one right number in it's right position"
+    puts "3- (~) means you got one right number but misplaced it"
+    puts "4- The feedback elements aren't sorted in proper order, Good-Luck ;)"
+    print "----------------"
+    print "----------------"
+    print "----------------"
+    print "----------------"
+    print "----------------" "\n"
+    puts "Try 4 different numbers (1-6) separated by 'space'"
+    12.times do 
+      turn
+      @feedback = []
+      if win?
+        puts "Code-breaker wins"
+        break
+      end
+      puts "Keep going, til' you guess it right"
     end
-    puts "Keep going, til' you guess it right"
+    puts"Game Over"
   end
-  puts"Game Over"
 end
 
 # example 
 game = Matsermind.new
+game.play
