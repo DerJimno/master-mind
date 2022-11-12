@@ -6,4 +6,9 @@ class Matsermind
     @board = [0, 0, 0, 0]
     p @board
   end
+
+  def update_board(first, second, third, fourth)
+    @board = [first, second, third, fourth]
+  end
+  
 end
