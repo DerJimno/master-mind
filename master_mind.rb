@@ -45,6 +45,12 @@ class Matsermind
     end
     @chosen_code
   end
+
+  def turn
+    input
+    update_board(@chosen_code)
+    feedback
+  end
 end
 
 # example 
