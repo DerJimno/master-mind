@@ -1,2 +1,2 @@
 # master_mind
-Mastermind (CLI game)
+Mastermind (CLI game) made with ruby
