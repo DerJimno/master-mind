@@ -1,15 +1,14 @@
 class Matsermind
-  attr_reader :board, :feedback
+  attr_reader :board, :feedback, :chosen_code
 
   def initialize 
     @win_comb = [1, 6, 2, 4] # example
     @feedback = []
     @board = [0, 0, 0, 0]
-    p @board
   end
 
-  def update_board(first, second, third, fourth)
-    @board = [first, second, third, fourth]
+  def update_board(code)
+    @board = code
   end
 
   def win?
@@ -26,14 +25,27 @@ class Matsermind
         end
       end
     end
-    p @feedback.shuffle
+    puts "Feedback: #{@feedback.shuffle}"
+  end
+
+  def conditioned?
+    @chosen_code.uniq.length == 4 && @chosen_code.all? { |el| el.between?(1, 6)}
+  end
+
+  def input
+    input = gets.chomp
+    @chosen_code = input.split(" ").map(&:to_i)
+    conditioned?
+    until conditioned?
+      puts "----Invalid input----"
+      puts "Try 4 different numbers between 1-6"
+      input = gets.chomp
+      @chosen_code = input.split(" ").map(&:to_i)
+      conditioned?
+    end
+    @chosen_code
   end
 end
 
 # example 
 game = Matsermind.new
-game.board
-game.update_board(1, 5, 6, 4)
-p game.board
-p game.win?
-game.feedback # => ["*", "*", "~"] result must be shuffled to make the game even harder!
