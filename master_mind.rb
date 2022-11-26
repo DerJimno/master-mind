@@ -6,7 +6,7 @@ class Matsermind
     @feedback = []
     @board = [0, 0, 0, 0]
     @included = []
-    @a = []
+    @existing = []
   end
 
   def update_board(code)
@@ -68,30 +68,30 @@ class Matsermind
   end
     
   def random_input
-    r_input = []
+    rand_input = []
     
-     until r_input.uniq.length == 4 do
+     until rand_input.uniq.length == 4 do
       if @included.uniq.length == 4
-        r_input += @included.uniq
-        r_input += r_input.shuffle!
+        rand_input += @included.uniq
+        rand_input += rand_input.shuffle!
 
-        until !@a.include? r_input.uniq do
-          r_input += r_input.shuffle!
+        until !@existing.include? rand_input.uniq do
+          rand_input += rand_input.shuffle!
         end
-        @a += [r_input.uniq]
+        @existing += [rand_input.uniq]
       else
-        r_input += @included.uniq
-        l = Array.new(1, rand(1..6))
-        until !r_input.include? l[0] do
-          l = Array.new(1, rand(1..6))
+        rand_input += @included.uniq
+        rand_number = Array.new(1, rand(1..6))
+        until !rand_input.include? rand_number[0] do
+          rand_number = Array.new(1, rand(1..6))
         end
-        r_input += l
+        rand_input += rand_number
       end
     end
     if @input == "m"
-      p r_input.uniq
+      p rand_input.uniq
     end
-    r_input.uniq
+    rand_input.uniq
   end
 
   def setup_turns
