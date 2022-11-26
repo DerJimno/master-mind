@@ -67,54 +67,6 @@ class Matsermind
     feedback
   end
   
-  def random_input
-    r_input = []
-    
-     until r_input.uniq.length == 4 do
-      if @included.uniq.length == 4
-        r_input += @included.uniq
-        r_input += r_input.shuffle!
-
-        until !@a.include? r_input.uniq do
-          r_input += r_input.shuffle!
-        end
-        @a += [r_input.uniq]
-      else
-        r_input += @included.uniq
-        l = Array.new(1, rand(1..6))
-        until !r_input.include? l[0] do
-          l = Array.new(1, rand(1..6))
-        end
-        r_input += l
-      end
-    end
-    if @input == "m"
-      p r_input.uniq
-    end
-    r_input.uniq
-    
-  end
-  
-  def setup_players
-    @input = gets.chomp.downcase
-    if @input == "m"
-      puts "AS a Mastermind, input your secret Code"
-      puts "Hint: 4 different numbers (1-6) separated by 'space'"
-      @win_comb = input_code
-    elsif @input == "c"
-      puts "Cpu is making secret code..."
-      sleep(2)
-      @win_comb = random_input
-    end
-    def setup_players?
-      if @input == "m" 
-        true
-      elsif @input == "c"
-        false
-      end
-    end
-  end
-
   def play
     puts "Welcome to Mastermind"
     print "----------------"
@@ -165,4 +117,4 @@ class Matsermind
   end
 end
 game = Matsermind.new
-game.play
+# game.play
