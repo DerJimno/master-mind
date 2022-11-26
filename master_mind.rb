@@ -95,7 +95,10 @@ class Matsermind
   end
 
   def setup_turns
-    @input = gets.chomp.downcase
+    until @input == "m" || @input == "c" do
+      puts "Would you like to be the Mastermind or the Code-breaker? (M or C)"
+      @input = gets.chomp.downcase
+    end
     if @input == "m"
       puts "AS a Mastermind, input your secret Code"
       puts "Hint: 4 different numbers (1-6) separated by 'space'"
@@ -123,16 +126,16 @@ class Matsermind
     print "}------------" 
     print "----------------"
     print "---------""\n"
-    puts "1- There are 6 possibilities in which only 4/6 numbers can occur(No Duplicates)"
-    puts "2- In feedback (*) means the player guessed one right number in it's right position"
-    puts "3- (~) means player got one right number but misplaced it"
-    puts "4- The feedback elements aren't sorted in proper order, Good-Luck ;)"
+    puts "1- You can play against the Cpu, remember: Humans are superior than computers "
+    puts "2- There are 6 possibilities in which only 4/6 numbers can occur(No Duplicates)"
+    puts "3- In feedback (*) means the player guessed one right number in it's right position"
+    puts "4- (~) means player got one right number but misplaced it"
+    puts "5- The feedback elements aren't sorted in proper order, Good-Luck ;)"
     print "----------------"
     print "----------------"
     print "----------------"
     print "----------------"
     print "----------------" "\n"
-    puts "Would you like to be the Mastermind or the Code-breaker? (M or C)"
     setup_turns
     if setup_turns? == false
       puts "Okay, Try 4 different numbers (1-6) separated by 'space'"
