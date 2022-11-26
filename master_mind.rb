@@ -23,12 +23,12 @@ class Matsermind
       @win_comb.each_with_index do |duplicate, index1|
         if number == duplicate && index == index1
           @feedback += ["*"]
-          if setup_players?
+          if setup_turns?
             @included += [duplicate]
           end
         elsif number == duplicate && index != index1
           @feedback += ["~"]
-          if setup_players?
+          if setup_turns?
             @included += [duplicate]
           end
         end
@@ -66,7 +66,27 @@ class Matsermind
     update_board(random_input)
     feedback
   end
-  
+    
+  def setup_turns
+    @input = gets.chomp.downcase
+    if @input == "m"
+      puts "AS a Mastermind, input your secret Code"
+      puts "Hint: 4 different numbers (1-6) separated by 'space'"
+      @win_comb = input_code
+    elsif @input == "c"
+      puts "Cpu is making secret code..."
+      sleep(2)
+      @win_comb = random_input
+    end
+    def setup_turns?
+      if @input == "m" 
+        true
+      elsif @input == "c"
+        false
+      end
+    end
+  end
+
   def play
     puts "Welcome to Mastermind"
     print "----------------"
@@ -86,8 +106,8 @@ class Matsermind
     print "----------------"
     print "----------------" "\n"
     puts "Would you like to be the Mastermind or the Code-breaker? (M or C)"
-    setup_players
-    if setup_players? == false
+    setup_turns
+    if setup_turns? == false
       puts "Okay, Try 4 different numbers (1-6) separated by 'space'"
       12.times do 
         your_turn
@@ -100,7 +120,7 @@ class Matsermind
       end
       puts"Game Over"
 
-    elsif setup_players? == true
+    elsif setup_turns? == true
       12.times do
         puts "Cpu is thinking..."
         sleep(2)
