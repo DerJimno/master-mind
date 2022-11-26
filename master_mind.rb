@@ -18,7 +18,6 @@ class Matsermind
   end
 
   def feedback
-    
     board.each_with_index do |number, index|
       @win_comb.each_with_index do |duplicate, index1|
         if number == duplicate && index == index1
@@ -39,21 +38,7 @@ class Matsermind
   end
 
   def conditioned?
-    @chosen_code.uniq.length == 4 && @chosen_code.all? { |el| el.between?(1, 6)}
-  end
-
-  def human_input
-    input = gets.chomp
-    @chosen_code = input.split(" ").map(&:to_i)
-    conditioned?
-    until conditioned?
-      puts "----Invalid input----"
-      puts "Try 4 different numbers between 1-6"
-      input = gets.chomp
-      @chosen_code = input.split(" ").map(&:to_i)
-      conditioned?
-    end
-    @chosen_code
+    @chosen_code.uniq.length == 4 && @chosen_code.length == 4 && @chosen_code.all? { |el| el.between?(1, 6)}
   end
 
   def your_turn
@@ -65,7 +50,18 @@ class Matsermind
     update_board(cpu_input)
     feedback
   end
-    
+
+  def human_input
+    input = gets.chomp
+    @chosen_code = input.split(" ").map(&:to_i)
+    conditioned?
+    until conditioned?
+      puts "----Invalid input----"
+      human_input
+    end
+    @chosen_code
+  end    
+
   def cpu_input
     rand_input = []
     
@@ -95,7 +91,7 @@ class Matsermind
 
   def setup_turns
     until @input == "m" || @input == "c" do
-      puts "Would you like to be the Mastermind or the Code-breaker? (M or C)"
+      puts "Would you like to be the Mastermind or the Code-breaker? (M or C):"
       @input = gets.chomp.downcase
     end
     if @input == "m"
