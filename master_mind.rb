@@ -67,6 +67,33 @@ class Matsermind
     feedback
   end
     
+  def random_input
+    r_input = []
+    
+     until r_input.uniq.length == 4 do
+      if @included.uniq.length == 4
+        r_input += @included.uniq
+        r_input += r_input.shuffle!
+
+        until !@a.include? r_input.uniq do
+          r_input += r_input.shuffle!
+        end
+        @a += [r_input.uniq]
+      else
+        r_input += @included.uniq
+        l = Array.new(1, rand(1..6))
+        until !r_input.include? l[0] do
+          l = Array.new(1, rand(1..6))
+        end
+        r_input += l
+      end
+    end
+    if @input == "m"
+      p r_input.uniq
+    end
+    r_input.uniq
+  end
+
   def setup_turns
     @input = gets.chomp.downcase
     if @input == "m"
@@ -137,4 +164,4 @@ class Matsermind
   end
 end
 game = Matsermind.new
-# game.play
+game.play
