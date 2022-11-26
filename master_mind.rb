@@ -100,7 +100,7 @@ class Matsermind
       @input = gets.chomp.downcase
     end
     if @input == "m"
-      puts "AS a Mastermind, input your secret Code"
+      puts "As a Mastermind, input your secret Code"
       puts "Hint: 4 different numbers (1-6) separated by 'space'"
       @win_comb = input_code
     elsif @input == "c"
