@@ -114,7 +114,7 @@ class Matsermind
     print "}------------" 
     print "----------------"
     print "---------""\n"
-    puts "1- You can play against the Cpu, remember: Humans are superior than computers "
+    puts "1- You can play against the Cpu, remember: Humans are superior to computers "
     puts "2- There are 6 possibilities in which only 4/6 numbers can occur(No Duplicates)"
     puts "3- In feedback (*) means the player guessed one right number in it's right position"
     puts "4- (~) means player got one right number but misplaced it"
