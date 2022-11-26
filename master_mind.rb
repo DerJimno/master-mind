@@ -23,12 +23,12 @@ class Matsermind
       @win_comb.each_with_index do |duplicate, index1|
         if number == duplicate && index == index1
           @feedback += ["*"]
-          if setup_turns?
+          if mastermind_or_codebreaker?
             @included += [duplicate]
           end
         elsif number == duplicate && index != index1
           @feedback += ["~"]
-          if setup_turns?
+          if mastermind_or_codebreaker?
             @included += [duplicate]
           end
         end
@@ -42,7 +42,7 @@ class Matsermind
     @chosen_code.uniq.length == 4 && @chosen_code.all? { |el| el.between?(1, 6)}
   end
 
-  def input_code
+  def human_input
     input = gets.chomp
     @chosen_code = input.split(" ").map(&:to_i)
     conditioned?
@@ -57,17 +57,16 @@ class Matsermind
   end
 
   def your_turn
-    input_code
-    update_board(@chosen_code)
+    update_board(human_input)
     feedback
   end
 
   def cpu_turn
-    update_board(random_input)
+    update_board(cpu_input)
     feedback
   end
     
-  def random_input
+  def cpu_input
     rand_input = []
     
      until rand_input.uniq.length == 4 do
@@ -102,13 +101,13 @@ class Matsermind
     if @input == "m"
       puts "As a Mastermind, input your secret Code"
       puts "Hint: 4 different numbers (1-6) separated by 'space'"
-      @win_comb = input_code
+      @win_comb = human_input
     elsif @input == "c"
       puts "Cpu is making secret code..."
       sleep(2)
-      @win_comb = random_input
+      @win_comb = cpu_input
     end
-    def setup_turns?
+    def mastermind_or_codebreaker?
       if @input == "m" 
         true
       elsif @input == "c"
@@ -137,7 +136,7 @@ class Matsermind
     print "----------------"
     print "----------------" "\n"
     setup_turns
-    if setup_turns? == false
+    if mastermind_or_codebreaker? == false
       puts "Okay, Try 4 different numbers (1-6) separated by 'space'"
       12.times do 
         your_turn
@@ -150,7 +149,7 @@ class Matsermind
       end
       puts"Game Over"
 
-    elsif setup_turns? == true
+    elsif mastermind_or_codebreaker? == true
       12.times do
         puts "Cpu is thinking..."
         sleep(2)
