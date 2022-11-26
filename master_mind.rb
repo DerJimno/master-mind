@@ -23,12 +23,12 @@ class Matsermind
       @win_comb.each_with_index do |duplicate, index1|
         if number == duplicate && index == index1
           @feedback += ["*"]
-          if mastermind_or_codebreaker?
+          if @input == "m" 
             @included += [duplicate]
           end
         elsif number == duplicate && index != index1
           @feedback += ["~"]
-          if mastermind_or_codebreaker?
+          if @input == "m" 
             @included += [duplicate]
           end
         end
@@ -107,13 +107,6 @@ class Matsermind
       sleep(2)
       @win_comb = cpu_input
     end
-    def mastermind_or_codebreaker?
-      if @input == "m" 
-        true
-      elsif @input == "c"
-        false
-      end
-    end
   end
 
   def play
@@ -136,12 +129,12 @@ class Matsermind
     print "----------------"
     print "----------------" "\n"
     setup_turns
-    if mastermind_or_codebreaker? == false
+    if @input == "c"
       puts "Okay, Try 4 different numbers (1-6) separated by 'space'"
       12.times do 
         your_turn
         @feedback = []
-        if win?
+        if win? 
           puts "Code-breaker wins"
           break
         end
@@ -149,7 +142,7 @@ class Matsermind
       end
       puts"Game Over"
 
-    elsif mastermind_or_codebreaker? == true
+    elsif @input == "m" 
       12.times do
         puts "Cpu is thinking..."
         sleep(2)
@@ -157,7 +150,7 @@ class Matsermind
         @feedback = []
         
         if win?
-          puts "Mastermind wins"
+          puts "Mastermind lost"
           break
         end
       end
